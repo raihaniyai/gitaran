@@ -48,7 +48,8 @@ export default async (req, res) => {
     const promotionData = {
       createTime: Date.now(),
       updateTime: Date.now(),
-      promotionName,
+      name: promotionName,
+      totalClaimed: 0,
       totalPromo,
       startDate,
       endDate,

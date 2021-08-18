@@ -4,7 +4,7 @@ import { Row, Col } from 'antd';
 
 import CampaignCard from '../CampaignCard';
 
-import campaignData from '../../constants/campaignData';
+import campaignData from '@constants/campaignData';
 
 import { Container, Breadcrumbs, Title } from './styles';
 
