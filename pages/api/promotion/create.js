@@ -28,11 +28,6 @@ const validateCreatePromotion = bodyRequest => {
     return err;
   }
 
-  if (!bodyRequest.username || bodyRequest.username === '') {
-    err = Error('Missing end date (VCP06)');
-    return err;
-  }
-
   return err;
 }
 
@@ -46,7 +41,9 @@ export default async (req, res) => {
     const totalPromo = req.body.totalPromo;
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
-    const username = req.body.username;
+
+    // optional field
+    const description = req.body.description || '';
 
     const promotionData = {
       createTime: Date.now(),
@@ -55,7 +52,7 @@ export default async (req, res) => {
       totalPromo,
       startDate,
       endDate,
-      username,
+      description,
     };
 
     promotionPath.set(promotionData);

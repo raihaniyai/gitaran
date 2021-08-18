@@ -46,7 +46,6 @@ export default async (req, res) => {
     const totalPromo = req.body.totalPromo;
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
-    const username = req.body.username;
 
     const promotionData = {
       updateTime: Date.now(),
@@ -54,7 +53,6 @@ export default async (req, res) => {
       totalPromo,
       startDate,
       endDate,
-      username,
     };
 
     promotionPath.update(promotionData);

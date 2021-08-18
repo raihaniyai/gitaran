@@ -1,15 +1,15 @@
 import db from '@utils/db';
 
-const validateCompanyData = bodyRequest => {
+const validateUpdateCompany = bodyRequest => {
   let err;
 
   if (!bodyRequest.name || bodyRequest.name === '') {
-    err = Error('Missing company name');
+    err = Error('Missing company name (VUC01)');
     return err;
   }
 
   if (!bodyRequest.website || bodyRequest.website === '') {
-    err = Error('Missing company website');
+    err = Error('Missing company website (VUC02)');
     return err;
   }
 
@@ -17,7 +17,7 @@ const validateCompanyData = bodyRequest => {
     if (bodyRequest.socialMedia.twitter) {
       bodyRequest.socialMedia.twitter.forEach(tw => {
         if (!tw.username || !tw.id) {
-          err = Error('Missing twitter data');
+          err = Error('Missing twitter data (VUC03)');
           return err;
         }
       });
@@ -28,28 +28,22 @@ const validateCompanyData = bodyRequest => {
 }
 
 export default async (req, res) => {
-  const err = validateCompanyData(req.body);
+  const err = validateUpdateCompany(req.body);
 
   if (!err) {
-    const companyName = req.body.name;
-    const companyId = companyName.toLowerCase().replace(/\s/g, '-');
-    const companiesPath = db.ref(`companies/${companyId}`);
-    const socialMedia = req.body.socialMedia;
-    const website = req.body.website;
 
     const companyData = {
-      "createTime": Date.now(),
-      "updateTime": Date.now(),
-      "name": companyName,
-      socialMedia: socialMedia ?? null,
+      updateTime: Date.now(),
+      companyName,
+      socialMedia,
       website,
     };
 
-    companiesPath.set(companyData);
+    companiesPath.update(companyData);
     res.status(200).json({
       status: 200,
       data: {
-        id: companyId,
+        id: promotionId,
         ...companyData,
       },
     });
