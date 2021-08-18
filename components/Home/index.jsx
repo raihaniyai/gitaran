@@ -1,20 +1,16 @@
-// import Head from 'next/head'
-// import Image from 'next/image'
-// import styles from '../styles/Home.module.css'
-
 import React, { useState } from 'react';
 
 import { Modal } from 'antd';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
-import SideNav from '../components/SideNav';
-import Campaigns from '../components/Campaigns';
+import SideNav from '../SideNav';
+import Campaigns from '../Campaigns';
 
-import { Container, AddButton } from '../styles/styles';
-import CampaignForm from '../components/CampaignForm';
+import { Container, AddButton } from './styles';
+import CampaignForm from '../CampaignForm';
 
-export default function Home() {
+const Home = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [formTitle, setFormTitle] = useState('New');
   const [formData, setFormData] = useState({});
@@ -54,4 +50,5 @@ export default function Home() {
       </Modal>
     </>
   );
-}
+};
+export default Home;

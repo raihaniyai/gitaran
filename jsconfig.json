@@ -8,6 +8,9 @@
       "@constants/*": [
         "constants/*"
       ],
-    }
+      "@components/*": [
+        "components/*"
+      ]
+    },
   }
 }
