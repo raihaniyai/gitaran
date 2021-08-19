@@ -1,4 +1,4 @@
-import db from '@utils/db';
+import { db } from '@utils/firebase';
 
 const validateCreatePromotion = bodyRequest => {
   let err;

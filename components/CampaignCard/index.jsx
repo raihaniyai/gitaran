@@ -4,9 +4,10 @@
 import React from 'react';
 import Image from 'next/image';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-import { Card } from 'antd';
+import { Button, Card } from 'antd';
 
 import {
+  ClaimButton,
   Container,
   Content,
   Title,
@@ -22,13 +23,16 @@ const CouponCard = ({
   claimed,
   eligible,
   showForm,
+  isClaim,
+  handleClaim,
+  isEligible,
 }) => (
   <Card
     className={Container}
     cover={(
       <Image alt="sample" src={proPlan} />
     )}
-    actions={[
+    actions={isClaim ? null : [
       <SettingOutlined key="setting" />,
       <EditOutlined
         key="edit"
@@ -44,7 +48,10 @@ const CouponCard = ({
         <p>Claimed: {claimed}</p>
         <p>Eligible: {eligible}</p>
       </div>
+
+      {isClaim && <Button type="primary" className={ClaimButton} onClick={handleClaim} disabled={!isEligible}>Get my code</Button>}
     </div>
   </Card>
 );
+
 export default CouponCard;

@@ -1,4 +1,4 @@
-import db from '@utils/db';
+import { db } from '@utils/firebase';
 
 export default async (req, res) => {
   const { companyId, promotionId } = req.query;

@@ -1,4 +1,4 @@
-import db from '@utils/db';
+import { db } from '@utils/firebase';
 
 const validateUpdateCompany = bodyRequest => {
   let err;
@@ -31,6 +31,11 @@ export default async (req, res) => {
   const err = validateUpdateCompany(req.body);
 
   if (!err) {
+    const companyName = req.body.name;
+    const companyId = companyName.toLowerCase().replace(/\s/g, '-');
+    const companiesPath = db.ref(`companies/${companyId}`);
+    const socialMedia = req.body.socialMedia;
+    const website = req.body.website;
 
     const companyData = {
       updateTime: Date.now(),

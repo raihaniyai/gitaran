@@ -1,4 +1,4 @@
-import db from '@utils/db';
+import { db } from '@utils/firebase';
 
 const validateCompanyData = bodyRequest => {
   let err;
@@ -32,20 +32,23 @@ export default async (req, res) => {
 
   if (!err) {
     const companyName = req.body.name;
-    const companyId = companyName.toLowerCase().replace(/\s/g, '-');
-    const companiesPath = db.ref(`companies/${companyId}`);
+    const companiesPath = db.ref(`companies`);
+    const snapshot = await companiesPath.get();
+    const companyList = snapshot.val();
+    const companyId = companyList.length;
+    const companyPath = db.ref(`companies/${companyId}`);
     const socialMedia = req.body.socialMedia;
     const website = req.body.website;
 
     const companyData = {
-      "createTime": Date.now(),
-      "updateTime": Date.now(),
-      "name": companyName,
+      createTime: Date.now(),
+      updateTime: Date.now(),
+      name: companyName,
       socialMedia: socialMedia ?? null,
       website,
     };
 
-    companiesPath.set(companyData);
+    companyPath.set(companyData);
     res.status(200).json({
       status: 200,
       data: {

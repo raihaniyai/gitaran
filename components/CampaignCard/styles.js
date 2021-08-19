@@ -27,3 +27,7 @@ export const Stats = css`
     justify-content: space-between;
     padding-top: 3px;
 `;
+
+export const ClaimButton = css`
+    width: 100%;
+`;
